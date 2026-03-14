@@ -5,7 +5,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': { target: 'https://51.21.161.160', changeOrigin: true },
+      '/api': {
+        target: 'https://server-nexora.onrender.com/api',
+        changeOrigin: true,
+        // CRITICAL: This allows the proxy to ignore the invalid/weak SSL certificate
+        secure: false, 
+        // Ensures that the path sent to the backend is correct
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
 })
