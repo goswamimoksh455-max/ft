@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://server-nexora.onrender.com',
+        target: 'https://server-nexora.onrender.com/',
         changeOrigin: true,
         // CRITICAL: This allows the proxy to ignore the invalid/weak SSL certificate
         secure: false, 

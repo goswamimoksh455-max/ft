@@ -43,7 +43,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useGoogleLogin } from '@react-oauth/google'
 
 // ── API helper ────────────────────────────────────────────────────────────────
-const API_BASE_URL = import.meta.env?.VITE_API_URL || 'https://server-nexora.onrender.com'
+const API_BASE_URL = import.meta.env?.VITE_API_URL || 'https://server-nexora.onrender.com/'
 
 async function api(path, { method = 'GET', body, token } = {}) {
   const headers = { 'Content-Type': 'application/json' }
