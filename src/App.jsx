@@ -130,15 +130,16 @@ function Avatar({ name, url, size = 10, colorIndex = 0 }) {
 // ── Modal wrapper ─────────────────────────────────────────────────────────────
 function Modal({ title, onClose, children, size = 'max-w-2xl' }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-4 backdrop-blur-sm sm:items-center">
-      <div className={`w-full ${size} rounded-3xl bg-white shadow-2xl`}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/40 backdrop-blur-sm sm:items-center sm:p-4">
+      <div className="absolute inset-0 -z-10" onClick={onClose} />
+      <div className={`w-full ${size} rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl animate-slide-up`}>
         <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
           <h3 className="text-xl font-bold text-slate-900">{title}</h3>
-          <button onClick={onClose} className="rounded-xl p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors">
+          <button onClick={onClose} className="rounded-xl p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors h-11 w-11 flex items-center justify-center">
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
-        <div className="max-h-[75vh] overflow-y-auto p-6">{children}</div>
+        <div className="max-h-[80vh] sm:max-h-[75vh] overflow-y-auto p-6 pb-12 sm:pb-6">{children}</div>
       </div>
     </div>
   )
@@ -371,18 +372,18 @@ function CreateGroupModal({ token, onClose, onCreated }) {
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">Group Name *</label>
           <input value={form.name} onChange={set('name')} placeholder="e.g. Goa Trip 2026"
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
+            className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
         </div>
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">Description</label>
           <textarea value={form.description} onChange={set('description')} rows={2} placeholder="What is this group for?"
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none resize-none" />
+            className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none resize-none" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1">Currency</label>
             <select value={form.currency} onChange={set('currency')}
-              className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none">
+              className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm outline-none bg-white">
               {['INR', 'USD', 'EUR', 'GBP', 'SGD'].map((c) => <option key={c}>{c}</option>)}
             </select>
           </div>
@@ -438,7 +439,7 @@ function JoinGroupModal({ token, user, onClose, onJoined }) {
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">Invite Link *</label>
           <input value={form.link} onChange={set('link')} placeholder="Paste link e.g. https://breach.app/invite/1"
-            className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
+            className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
         </div>
         {error && <p className="rounded-xl bg-rose-50 border border-rose-200 px-4 py-2 text-sm text-rose-700">{error}</p>}
         <div className="flex justify-end gap-3">
@@ -1049,30 +1050,30 @@ function AddExpenseModal({ token, group, members, currentUser, onClose, onAdded 
             <div className="col-span-2">
               <label className="block text-sm font-semibold text-slate-700 mb-1">Description *</label>
               <input value={form.title} onChange={set('title')} placeholder="e.g. Beach shack dinner"
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
+                className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Amount (₹) *</label>
               <input type="number" min="0.01" step="0.01" value={form.amount} onChange={set('amount')}
                 placeholder="0.00"
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
+                className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none" />
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Category</label>
               <select value={form.category} onChange={set('category')}
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none">
+                className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm outline-none bg-white">
                 {Object.keys(CATEGORY_ICONS).map((c) => <option key={c}>{c}</option>)}
               </select>
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Date</label>
               <input type="date" value={form.date} onChange={set('date')}
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none" />
+                className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm outline-none bg-white" />
             </div>
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Paid By</label>
               <select value={form.paid_by} onChange={set('paid_by')}
-                className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none">
+                className="w-full h-11 rounded-xl border border-slate-300 px-3 text-sm outline-none bg-white">
                 {members.map((m) => <option key={m.id} value={m.id}>{m.displayName || m.username}</option>)}
               </select>
             </div>
@@ -1622,6 +1623,13 @@ function AppShell({ token, user, onLogout }) {
     }).catch(console.error).finally(() => setLoading(false))
   }, [activeGroupId, token])
 
+  // Redirect to groups tab on mobile/boot if activeGroupId is null
+  useEffect(() => {
+    if (!activeGroupId && activeTab !== 'profile') {
+      setActiveTab('groups')
+    }
+  }, [activeGroupId, activeTab])
+
   function refreshExpenses() {
     Promise.all([
       api(`/api/v1/groups/${activeGroupId}/expenses`, { token }),
@@ -1669,11 +1677,10 @@ function AppShell({ token, user, onLogout }) {
   const nonZeroOptimizationMembers = (balances?.members || []).filter((m) => Math.abs(Number(m.net || 0)) > 0.005)
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-100 font-sans">
+    <div className="flex h-[100dvh] w-screen overflow-hidden bg-slate-100 font-sans">
 
       {/* ── Sidebar ──────────────────────────────────────────────────── */}
-      <aside className="flex w-64 flex-shrink-0 flex-col bg-slate-900 text-white overflow-hidden">
-
+      <aside className="hidden md:flex w-64 flex-shrink-0 flex-col bg-slate-900 text-white overflow-hidden">
         {/* Brand */}
         <div className="flex items-center gap-2.5 px-5 py-5 border-b border-slate-800">
           <div className="h-8 w-8 rounded-xl bg-emerald-500 flex items-center justify-center font-black text-sm text-white">N</div>
@@ -1733,28 +1740,34 @@ function AppShell({ token, user, onLogout }) {
       </aside>
 
       {/* ── Main ─────────────────────────────────────────────────────── */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col h-full min-h-0 overflow-hidden relative">
 
         {/* Top header bar */}
-        <header className="flex items-center justify-between gap-4 bg-white border-b border-slate-200 px-6 py-4 flex-shrink-0">
-          <div>
-            <h1 className="text-xl font-extrabold text-slate-900">
-              {activeGroup ? activeGroup.name : `Hello, ${(user.displayName || user.username || 'User').split(' ')[0]} 👋`}
+        <header className="flex items-center justify-between gap-3 bg-white border-b border-slate-200 px-4 md:px-6 py-4 flex-shrink-0">
+          <div className="min-w-0">
+            <h1 className="text-lg md:text-xl font-extrabold text-slate-900 truncate">
+              {activeTab === 'profile'
+                ? 'My Profile'
+                : activeTab === 'groups'
+                  ? 'My Groups'
+                  : activeGroup
+                    ? activeGroup.name
+                    : `Hello, ${(user.displayName || user.username || 'User').split(' ')[0]} 👋`}
             </h1>
-            {activeGroup && (
-              <p className="text-xs text-slate-500 mt-0.5">
+            {activeTab !== 'profile' && activeTab !== 'groups' && activeGroup && (
+              <p className="text-xs text-slate-500 mt-0.5 truncate">
                 {members.length} member{members.length !== 1 ? 's' : ''} · {activeGroup.currency} · {activeGroup.description || 'No description'}
               </p>
             )}
           </div>
-          {activeGroup && (
+          {activeTab !== 'profile' && activeTab !== 'groups' && activeGroup && (
             <div className="flex gap-2">
               <button onClick={() => setShowExpense(true)}
-                className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700 transition-colors">
+                className="hidden sm:inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700 transition-colors">
                 + Add Expense
               </button>
               <button onClick={() => setShowSettle(true)}
-                className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-600 transition-colors">
+                className="rounded-xl bg-emerald-500 px-3 md:px-4 py-2 text-xs md:text-sm font-bold text-white hover:bg-emerald-600 transition-colors">
                 Settle Up
               </button>
             </div>
@@ -1762,26 +1775,26 @@ function AppShell({ token, user, onLogout }) {
         </header>
 
         {/* Stat cards */}
-        {activeGroup && (
-          <div className="grid grid-cols-3 gap-4 px-6 py-4 flex-shrink-0 bg-white border-b border-slate-200">
+        {activeGroup && activeTab !== 'profile' && activeTab !== 'groups' && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 px-4 md:px-6 py-4 flex-shrink-0 bg-white border-b border-slate-200">
             <div className="rounded-2xl bg-rose-50 border border-rose-100 p-4">
               <p className="text-xs font-semibold text-rose-400 uppercase tracking-wider">To Pay</p>
-              <p className="mt-1 text-2xl font-extrabold text-rose-600">{fmt(Math.max(0, -myNet))}</p>
+              <p className="mt-1 text-xl md:text-2xl font-extrabold text-rose-600">{fmt(Math.max(0, -myNet))}</p>
             </div>
             <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-4">
               <p className="text-xs font-semibold text-emerald-500 uppercase tracking-wider">To Receive</p>
-              <p className="mt-1 text-2xl font-extrabold text-emerald-600">{fmt(Math.max(0, myNet))}</p>
+              <p className="mt-1 text-xl md:text-2xl font-extrabold text-emerald-600">{fmt(Math.max(0, myNet))}</p>
             </div>
             <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4">
               <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Net Balance</p>
-              <p className={`mt-1 text-2xl font-extrabold ${myNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>{fmt(myNet)}</p>
+              <p className={`mt-1 text-xl md:text-2xl font-extrabold ${myNet >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>{fmt(myNet)}</p>
             </div>
           </div>
         )}
 
-        {/* Tabs */}
+        {/* Tabs (Desktop only) */}
         {activeGroup && (
-          <div className="flex gap-1 px-6 pt-4 flex-shrink-0 bg-slate-50 border-b border-slate-200">
+          <div className="hidden md:flex gap-1 px-6 pt-4 flex-shrink-0 bg-slate-50 border-b border-slate-200">
             {['expenses', 'balances', 'members', 'profile'].map((tab) => (
               <button key={tab} onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2.5 text-sm font-semibold capitalize transition-all border-b-2 -mb-px
@@ -1795,14 +1808,14 @@ function AppShell({ token, user, onLogout }) {
         )}
 
         {/* Scrollable content area */}
-        <div className="flex-1 overflow-y-auto bg-slate-50">
+        <div className="flex-1 overflow-y-auto bg-slate-50 pb-24 md:pb-0">
           {loading && (
             <div className="flex items-center justify-center h-full">
               <Spinner />
             </div>
           )}
 
-          {!activeGroup && !loading && (
+          {!activeGroup && !loading && activeTab !== 'groups' && activeTab !== 'profile' && (
             <div className="flex flex-col items-center justify-center h-full text-center p-10">
               <div className="text-6xl mb-4">💸</div>
               <h2 className="text-2xl font-extrabold text-slate-800 mb-2">Welcome to Nexora</h2>
@@ -1820,174 +1833,278 @@ function AppShell({ token, user, onLogout }) {
             </div>
           )}
 
-          {!loading && activeGroup && (
-            <div className="px-6 py-5">
+          {!loading && (
+            <div className="px-4 md:px-6 py-4 md:py-5">
 
-              {/* EXPENSES tab */}
-              {activeTab === 'expenses' && (
-                <div className="space-y-2">
-                  {expenses.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-20 text-center">
-                      <p className="text-5xl mb-3">🧾</p>
-                      <p className="font-bold text-slate-700 text-lg">No expenses yet</p>
-                      <p className="text-sm text-slate-400 mt-1">Add your first expense to start tracking.</p>
-                      <button onClick={() => setShowExpense(true)}
-                        className="mt-5 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-slate-700">
-                        + Add Expense
-                      </button>
-                    </div>
-                  )}
-                  {expenses.map((exp) => {
-                    const paidByMe = exp.paidBy === user.id
-                    const share = Number(exp.your_share) || 0
-                    const youOweAmt = paidByMe ? -(exp.amount - share) : share
-                    return (
-                      <article key={exp.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-5 py-4 hover:border-slate-300 hover:shadow-sm transition-all">
-                        <div className="flex items-center gap-4">
-                          <span className="text-2xl">{CATEGORY_ICONS[exp.category] || '📦'}</span>
-                          <div>
-                            <p className="font-bold text-slate-900">{exp.description || exp.title || 'Expense'}</p>
-                            <p className="text-xs text-slate-500 mt-0.5">
-                              {exp.category} · Paid by {exp.paidByUser?.displayName || exp.paidByUser?.username || 'Someone'}
-                              {paidByMe ? ' (you)' : ''}
-                            </p>
-                            <p className="text-xs text-slate-400 mt-0.5">
-                              {new Date(exp.expenseDate || exp.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                              &nbsp;· <span className="capitalize">{exp.splitType} split</span>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-lg font-extrabold text-slate-900">{fmt(exp.amount)}</p>
-                          <p className={`text-xs font-bold mt-0.5 ${youOweAmt > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
-                            {youOweAmt > 0.005
-                              ? `you owe ${fmt(youOweAmt)}`
-                              : youOweAmt < -0.005
-                                ? `you're owed ${fmt(Math.abs(youOweAmt))}`
-                                : 'settled'}
-                          </p>
-                        </div>
-                      </article>
-                    )
-                  })}
-                </div>
-              )}
-
-              {/* BALANCES tab */}
-              {activeTab === 'balances' && (
-                <div className="space-y-4">
-                  {balances && (
-                    <>
-                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                        {balances.members.map((m, i) => (
-                          <article key={m.id} className={`rounded-2xl border p-4 bg-white ${m.net >= 0 ? 'border-emerald-200' : 'border-rose-200'}`}>
-                            <div className="flex items-center gap-3">
-                              <div className={`h-10 w-10 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0
-                                ${m.net >= 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
-                                {(m.displayName || m.username || '?')[0].toUpperCase()}
-                              </div>
-                              <div>
-                                <p className="text-sm font-bold text-slate-900">{m.displayName || m.username}{m.id === user.id ? ' (you)' : ''}</p>
-                                <p className={`text-xs font-semibold ${m.net >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                                  {m.net >= 0 ? `to recieve ${fmt(m.net)}` : `to pay ${fmt(Math.abs(m.net))}`}
-                                </p>
-                              </div>
-                            </div>
-                          </article>
-                        ))}
+              {/* GROUPS tab (Mobile only, handles group switching & settings) */}
+              {activeTab === 'groups' && (
+                <div className="space-y-4 max-w-2xl mx-auto">
+                  {/* User profile summary */}
+                  <div className="rounded-2xl bg-slate-900 text-white p-4 shadow-soft">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-emerald-500 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                        {(user.displayName || user.username || 'U')[0].toUpperCase()}
                       </div>
-
-                      {balances.settlements.length > 0 && (
-                        <div>
-                          <p className="text-sm font-bold text-slate-700 mb-3">Optimized Settlement Plan</p>
-                          <div className="space-y-2">
-                            {nonZeroOptimizationMembers.map((m) => {
-                              const selfName = m.displayName || m.username || 'Member'
-                              const direction = settlementDirectionByUser[m.id]
-                              const payTargets = direction ? [...direction.payTo] : []
-                              const receiveSources = direction ? [...direction.receiveFrom] : []
-
-                              if (m.net < -0.005 && payTargets.length > 0) {
-                                return (
-                                  <div key={`opt-${m.id}-pay`} className="rounded-xl border border-slate-200 bg-white px-5 py-3">
-                                    <p className="text-sm text-slate-700">
-                                      <span className="font-bold">{selfName}</span>
-                                      <span className="text-rose-600 font-bold mx-2">-&gt;</span>
-                                      <span className="font-bold">{payTargets.join(', ')}</span>
-                                    </p>
-                                  </div>
-                                )
-                              }
-
-                              if (m.net > 0.005 && receiveSources.length > 0) {
-                                return (
-                                  <div key={`opt-${m.id}-receive`} className="rounded-xl border border-slate-200 bg-white px-5 py-3">
-                                    <p className="text-sm text-slate-700">
-                                      <span className="font-bold">{selfName}</span>
-                                      <span className="text-emerald-600 font-bold mx-2">&lt;-</span>
-                                      <span className="font-bold">{receiveSources.join(', ')}</span>
-                                    </p>
-                                  </div>
-                                )
-                              }
-
-                              return null
-                            })}
-                          </div>
-                        </div>
-                      )}
-
-                      {balances.settlements.length === 0 && (
-                        <div className="flex flex-col items-center justify-center py-16 text-center">
-                          <p className="text-4xl mb-2">🎉</p>
-                          <p className="font-bold text-slate-700">All balanced!</p>
-                          <p className="text-sm text-slate-400 mt-1">No settlements needed in this group.</p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              )}
-
-              {/* MEMBERS tab */}
-              {activeTab === 'members' && (
-                <div className="space-y-3">
-                  <div className="rounded-2xl border border-slate-200 bg-white p-4">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Invite Link</p>
-                    <div className="flex gap-2">
-                      <input readOnly value={`${window.location.origin}/invite/${activeGroup?.id || ''}`}
-                        className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600" />
-                      <button onClick={() => {
-                        navigator.clipboard?.writeText(`${window.location.origin}/invite/${activeGroup?.id || ''}`)
-                        showToast('Invite link copied!')
-                      }} className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700">
-                        Copy
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold truncate">{user.displayName || user.username}</p>
+                        <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                      </div>
+                      <button onClick={onLogout}
+                        className="rounded-xl border border-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                        Sign Out
                       </button>
                     </div>
                   </div>
-                  {members.map((m, i) => (
-                    <article key={m.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4">
-                      <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-700 flex-shrink-0">
-                          {(m.displayName || m.username || '?')[0].toUpperCase()}
-                        </div>
-                        <div>
-                          <p className="font-bold text-slate-900">{m.displayName || m.username}{m.id === user.id ? ' (you)' : ''}</p>
-                          {m.upiId && <p className="text-xs text-slate-400">UPI: {m.upiId}</p>}
+
+                  {/* Actions */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <button onClick={() => setShowCreateGroup(true)}
+                      className="rounded-xl bg-emerald-500 h-11 text-xs font-bold text-white hover:bg-emerald-600 transition-colors flex items-center justify-center gap-1 shadow-soft">
+                      <span>+ New Group</span>
+                    </button>
+                    <button onClick={() => setShowJoinGroup(true)}
+                      className="rounded-xl bg-slate-900 h-11 text-xs font-bold text-white hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 shadow-soft">
+                      <span>Join Group</span>
+                    </button>
+                  </div>
+
+                  {/* Group list */}
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest px-1">Your Groups</p>
+                    {groups.length === 0 && (
+                      <div className="text-center py-10 rounded-2xl border border-dashed border-slate-300 bg-white">
+                        <p className="text-sm text-slate-500">No groups yet. Create or join one!</p>
+                      </div>
+                    )}
+                    {groups.map((g) => {
+                      const isActive = activeGroupId === g.id
+                      return (
+                        <button key={g.id} onClick={() => { setActiveGroupId(g.id); setActiveTab('expenses') }}
+                          className={`w-full rounded-2xl p-4 text-left transition-all border flex items-center justify-between bg-white shadow-sm
+                            ${isActive
+                              ? 'border-emerald-500 ring-2 ring-emerald-100'
+                              : 'border-slate-200 hover:border-slate-300'}`}>
+                          <div className="min-w-0">
+                            <p className="text-sm font-bold text-slate-900 truncate">{g.name}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">{g.memberCount} member{g.memberCount !== 1 ? 's' : ''} · {g.currency}</p>
+                          </div>
+                          {isActive && (
+                            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg">Active</span>
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Active group settings & members */}
+                  {activeGroup && (
+                    <div className="rounded-2xl border border-slate-200 bg-white p-4 space-y-4 shadow-sm">
+                      <div>
+                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Invite Link</p>
+                        <div className="flex gap-2">
+                          <input readOnly value={`${window.location.origin}/invite/${activeGroup?.id || ''}`}
+                            className="flex-1 h-10 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs text-slate-600 outline-none" />
+                          <button onClick={() => {
+                            navigator.clipboard?.writeText(`${window.location.origin}/invite/${activeGroup?.id || ''}`)
+                            showToast('Invite link copied!')
+                          }} className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700">
+                            Copy
+                          </button>
                         </div>
                       </div>
-                      <span className={`text-xs rounded-full px-3 py-1 font-semibold
-                        ${m.role === 'admin' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500'}`}>
-                        {m.role}
-                      </span>
-                    </article>
-                  ))}
+                      
+                      <div>
+                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Members ({members.length})</p>
+                        <div className="space-y-2">
+                          {members.map((m) => (
+                            <div key={m.id} className="flex items-center justify-between py-1 border-b border-slate-50 last:border-0">
+                              <div className="flex items-center gap-2">
+                                <div className="h-7 w-7 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-700">
+                                  {(m.displayName || m.username || '?')[0].toUpperCase()}
+                                </div>
+                                <span className="text-xs font-semibold text-slate-800">{m.displayName || m.username}{m.id === user.id ? ' (you)' : ''}</span>
+                              </div>
+                              <span className={`text-[10px] rounded-full px-2 py-0.5 font-bold capitalize ${m.role === 'admin' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500'}`}>
+                                {m.role}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
+              )}
+
+              {activeGroup && (
+                <>
+                  {/* EXPENSES tab */}
+                  {activeTab === 'expenses' && (
+                    <div className="space-y-2 max-w-2xl mx-auto">
+                      {expenses.length === 0 && (
+                        <div className="flex flex-col items-center justify-center py-20 text-center">
+                          <p className="text-5xl mb-3">🧾</p>
+                          <p className="font-bold text-slate-700 text-lg">No expenses yet</p>
+                          <p className="text-sm text-slate-400 mt-1">Add your first expense to start tracking.</p>
+                          <button onClick={() => setShowExpense(true)}
+                            className="mt-5 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-slate-700">
+                            + Add Expense
+                          </button>
+                        </div>
+                      )}
+                      {expenses.map((exp) => {
+                        const paidByMe = exp.paidBy === user.id
+                        const share = Number(exp.your_share) || 0
+                        const youOweAmt = paidByMe ? -(exp.amount - share) : share
+                        return (
+                          <article key={exp.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 md:px-5 py-4 hover:border-slate-300 hover:shadow-sm transition-all shadow-sm">
+                            <div className="flex items-center gap-3 md:gap-4 min-w-0">
+                              <span className="text-2xl flex-shrink-0">{CATEGORY_ICONS[exp.category] || '📦'}</span>
+                              <div className="min-w-0">
+                                <p className="font-bold text-slate-900 truncate">{exp.description || exp.title || 'Expense'}</p>
+                                <p className="text-xs text-slate-500 mt-0.5 truncate">
+                                  {exp.category} · Paid by {exp.paidByUser?.displayName || exp.paidByUser?.username || 'Someone'}
+                                  {paidByMe ? ' (you)' : ''}
+                                </p>
+                                <p className="text-xs text-slate-400 mt-0.5">
+                                  {new Date(exp.expenseDate || exp.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                  &nbsp;· <span className="capitalize">{exp.splitType} split</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="text-right flex-shrink-0">
+                              <p className="text-base md:text-lg font-extrabold text-slate-900">{fmt(exp.amount)}</p>
+                              <p className={`text-xs font-bold mt-0.5 ${youOweAmt > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
+                                {youOweAmt > 0.005
+                                  ? `you owe ${fmt(youOweAmt)}`
+                                  : youOweAmt < -0.005
+                                    ? `you're owed ${fmt(Math.abs(youOweAmt))}`
+                                    : 'settled'}
+                              </p>
+                            </div>
+                          </article>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  {/* BALANCES tab */}
+                  {activeTab === 'balances' && (
+                    <div className="space-y-4 max-w-2xl mx-auto">
+                      {balances && (
+                        <>
+                          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
+                            {balances.members.map((m) => (
+                              <article key={m.id} className={`rounded-2xl border p-4 bg-white shadow-sm ${m.net >= 0 ? 'border-emerald-100' : 'border-rose-100'}`}>
+                                <div className="flex items-center gap-3">
+                                  <div className={`h-10 w-10 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0
+                                    ${m.net >= 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                    {(m.displayName || m.username || '?')[0].toUpperCase()}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <p className="text-sm font-bold text-slate-900 truncate">{m.displayName || m.username}{m.id === user.id ? ' (you)' : ''}</p>
+                                    <p className={`text-xs font-semibold truncate ${m.net >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                                      {m.net >= 0 ? `to receive ${fmt(m.net)}` : `to pay ${fmt(Math.abs(m.net))}`}
+                                    </p>
+                                  </div>
+                                </div>
+                              </article>
+                            ))}
+                          </div>
+
+                          {balances.settlements.length > 0 && (
+                            <div className="space-y-3">
+                              <p className="text-sm font-bold text-slate-700">Optimized Settlement Plan</p>
+                              <div className="space-y-2">
+                                {nonZeroOptimizationMembers.map((m) => {
+                                  const selfName = m.displayName || m.username || 'Member'
+                                  const direction = settlementDirectionByUser[m.id]
+                                  const payTargets = direction ? [...direction.payTo] : []
+                                  const receiveSources = direction ? [...direction.receiveFrom] : []
+
+                                  if (m.net < -0.005 && payTargets.length > 0) {
+                                    return (
+                                      <div key={`opt-${m.id}-pay`} className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                                        <p className="text-sm text-slate-700 flex items-center justify-between">
+                                          <span><span className="font-bold">{selfName}</span> owes</span>
+                                          <span className="text-rose-600 font-bold mx-2">&rarr;</span>
+                                          <span className="font-bold text-right">{payTargets.join(', ')}</span>
+                                        </p>
+                                      </div>
+                                    )
+                                  }
+
+                                  if (m.net > 0.005 && receiveSources.length > 0) {
+                                    return (
+                                      <div key={`opt-${m.id}-receive`} className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                                        <p className="text-sm text-slate-700 flex items-center justify-between">
+                                          <span><span className="font-bold">{selfName}</span> receives from</span>
+                                          <span className="text-emerald-600 font-bold mx-2">&larr;</span>
+                                          <span className="font-bold text-right">{receiveSources.join(', ')}</span>
+                                        </p>
+                                      </div>
+                                    )
+                                  }
+
+                                  return null
+                                })}
+                              </div>
+                            </div>
+                          )}
+
+                          {balances.settlements.length === 0 && (
+                            <div className="flex flex-col items-center justify-center py-16 text-center">
+                              <p className="text-4xl mb-2">🎉</p>
+                              <p className="font-bold text-slate-700">All balanced!</p>
+                              <p className="text-sm text-slate-400 mt-1">No settlements needed in this group.</p>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
+
+                  {/* MEMBERS tab (Desktop only) */}
+                  {activeTab === 'members' && (
+                    <div className="space-y-3 max-w-2xl mx-auto">
+                      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Invite Link</p>
+                        <div className="flex gap-2">
+                          <input readOnly value={`${window.location.origin}/invite/${activeGroup?.id || ''}`}
+                            className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs text-slate-600 outline-none" />
+                          <button onClick={() => {
+                            navigator.clipboard?.writeText(`${window.location.origin}/invite/${activeGroup?.id || ''}`)
+                            showToast('Invite link copied!')
+                          }} className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700">
+                            Copy
+                          </button>
+                        </div>
+                      </div>
+                      {members.map((m) => (
+                        <article key={m.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-700 flex-shrink-0">
+                              {(m.displayName || m.username || '?')[0].toUpperCase()}
+                            </div>
+                            <div>
+                              <p className="font-bold text-slate-900">{m.displayName || m.username}{m.id === user.id ? ' (you)' : ''}</p>
+                              {m.upiId && <p className="text-xs text-slate-400">UPI: {m.upiId}</p>}
+                            </div>
+                          </div>
+                          <span className={`text-xs rounded-full px-3 py-1 font-semibold
+                            ${m.role === 'admin' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500'}`}>
+                            {m.role}
+                          </span>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
 
               {/* PROFILE tab */}
               {activeTab === 'profile' && (
-                <div className="max-w-md">
+                <div className="max-w-md mx-auto">
                   <ProfileTab token={token} user={user} showToast={showToast} />
                 </div>
               )}
