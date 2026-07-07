@@ -126,7 +126,7 @@ export default function AuthScreen({ onAuth }) {
           <div className="mt-8 rounded-2xl bg-white/15 border border-white/20 p-4 text-sm space-y-1">
             <p className="font-semibold text-white/90">Demo Credentials</p>
             <p className="text-emerald-100">📧 priya@breach.app</p>
-            <p className="text-emerald-100">🔑 Priya@1234 (updated)</p>
+            <p className="text-emerald-100">🔑 Priya@1234</p>
           </div>
         </div>
 
