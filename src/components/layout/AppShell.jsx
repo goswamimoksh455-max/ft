@@ -16,6 +16,12 @@ function Spinner() {
 }
 
 export default function AppShell({ token, user, onLogout }) {
+  // Lock body scroll when app shell is active
+  useEffect(() => {
+    document.body.classList.add('app-shell-active')
+    return () => document.body.classList.remove('app-shell-active')
+  }, [])
+
   const [groups, setGroups]         = useState([])
   const [activeGroupId, setActiveGroupId] = useState(null)
   const [groupDetail, setGroupDetail] = useState(null)   // { group, members }

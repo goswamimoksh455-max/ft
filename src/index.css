@@ -16,9 +16,15 @@
 
 body {
   margin: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: #f8fafc;
+}
+
+/* Lock scroll when app shell is active (added via JS) */
+body.app-shell-active {
   height: 100dvh;
   overflow: hidden;
-  background: #f8fafc;
 }
 
 h1,
@@ -51,4 +57,12 @@ button {
 
 .animate-slide-up {
   animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Safe area padding for mobile devices with notch/home-bar */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
 }
