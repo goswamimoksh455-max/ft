@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Modal from '../common/Modal'
 import { api } from '../../api/apiClient'
 import { fmt } from '../../utils/formatters'
+import { PartyPopper } from 'lucide-react'
 
 export default function SettleUpModal({ token, group, simplifiedDebts = [], members, currentUser, onClose, onSettled }) {
   const [marking, setMarking]       = useState(null)
@@ -241,7 +242,7 @@ export default function SettleUpModal({ token, group, simplifiedDebts = [], memb
 
         {mine.length === 0 && fromOthers.length === 0 && (
           <div className="flex flex-col items-center py-10 text-center">
-            <span className="text-5xl mb-3">🎉</span>
+            <PartyPopper className="w-12 h-12 text-emerald-500 mb-3" />
             <p className="font-bold text-slate-800">All settled up!</p>
             <p className="text-sm text-slate-500 mt-1">No pending settlements in this group.</p>
           </div>

@@ -4,7 +4,7 @@ import Avatar from '../common/Avatar'
 import { api, apiUploadBinary } from '../../api/apiClient'
 import { fmt } from '../../utils/formatters'
 import { CATEGORY_ICONS } from '../../utils/constants'
-
+import { Scale, Percent, PenLine } from 'lucide-react'
 export default function AddExpenseModal({ token, group, members, currentUser, onClose, onAdded }) {
   const [step, setStep]                 = useState(1)
   const [entryMode, setEntryMode]       = useState('original') // original | image
@@ -681,7 +681,7 @@ export default function AddExpenseModal({ token, group, members, currentUser, on
               <button key={m} onClick={() => handleMethodChange(m)}
                 className={`flex-1 rounded-xl py-2 text-xs font-bold capitalize transition-colors
                   ${splitMethod === m ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>
-                {m === 'equal' ? '⚖️ Equal' : m === 'percentage' ? '% Percent' : '✏️ Custom'}
+                {m === 'equal' ? <span className="flex items-center justify-center gap-1.5"><Scale className="w-3.5 h-3.5" /> Equal</span> : m === 'percentage' ? <span className="flex items-center justify-center gap-1.5"><Percent className="w-3.5 h-3.5" /> Percent</span> : <span className="flex items-center justify-center gap-1.5"><PenLine className="w-3.5 h-3.5" /> Custom</span>}
               </button>
             ))}
             </div>
