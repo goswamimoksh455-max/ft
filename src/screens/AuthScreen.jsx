@@ -20,17 +20,14 @@ export default function AuthScreen({ onAuth }) {
     setLoading(true)
     try {
       if (mode === 'signup') {
-        await api('/api/v1/auth/register', {
+        // Register now returns tokens directly — no need for a separate login call
+        const data = await api('/api/v1/auth/register', {
           method: 'POST',
           body: { email: form.email, password: form.password, name: form.name, displayName: form.name }
         })
-        const loginData = await api('/api/v1/auth/login', {
-          method: 'POST',
-          body: { email: form.email, password: form.password }
-        })
-        localStorage.setItem('breach_token', loginData.accessToken)
-        if (loginData.refreshToken) localStorage.setItem('breach_refresh', loginData.refreshToken)
-        onAuth(loginData.accessToken, loginData.user)
+        localStorage.setItem('breach_token', data.accessToken)
+        if (data.refreshToken) localStorage.setItem('breach_refresh', data.refreshToken)
+        onAuth(data.accessToken, data.user)
       } else {
         const data = await api('/api/v1/auth/login', {
           method: 'POST',

@@ -9,6 +9,7 @@ export async function api(path, { method = 'GET', body, token } = {}) {
   const res = await fetch(url, {
     method,
     headers,
+    credentials: 'include',
     body: body ? JSON.stringify(body) : undefined,
   })
   
@@ -34,6 +35,7 @@ export async function apiUploadBinary(path, { file, token } = {}) {
   const res = await fetch(url, {
     method: 'POST',
     headers,
+    credentials: 'include',
     body: file,
   })
 
