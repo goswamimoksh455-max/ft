@@ -13,7 +13,7 @@ import Toast from '../common/Toast'
 import Sidebar from './Sidebar'
 
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
-import { Menu, Package, Plus, Banknote, Hand } from 'lucide-react'
+import { Menu, Package, Plus, Banknote, Hand, PartyPopper } from 'lucide-react'
 
 function Spinner() {
   return <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-emerald-500" />
